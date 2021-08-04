@@ -1,0 +1,19 @@
+<!-- Loop over each object in the posts array -->
+{{#each posts as |post| }}
+<div class="row mb-4 post ">
+  <div class="col-12">
+    <h2>
+      <a href="/api/post/{{post.id}}">{{post.post_title}}</a>
+    </h2>
+  </div>
+  <div class="col-md-12">
+    <p>
+      {{post.post_body}}
+    </p>
+  </div>
+  <div class="col-12 text-right mt-0">
+  <p class="side-note mb-0">Created by {{post.user.user_name}} on {{format_date  post.post_date}}</p>
+  </div>
+</div>
+
+{{/each}}

@@ -1,0 +1,40 @@
+<div>
+  <div class="">
+    <h2 class="post text-center postId" data-id="{{posts.id}}">{{posts.post_title}}</h2>
+    <p>{{posts.post_body}}</p>
+    <p class="text-right side-note mb-0">Created by {{posts.user.user_name}} on {{format_date posts.post_date}}</p>
+  </div>
+  {{#if posts.comments.length}}
+  <div class="comment-list  mt-3">
+    <h3 class="post sessUserId" data-id="{{sessUserId}}">Comments:</h3>
+     {{#each posts.comments as |comment| }}
+    <div class="comment">  
+      <p>{{comment.comment_body}}</p>
+      <div class="display-flex justify-space-between align-center">
+        <button type="submit" class="btn btn-primary delete-btn" data-id="{{comment.id}},{{comment.user.id}}">Delete</button>
+        <div class="side-note text-right">
+          ~<span class="userId" data-id="{{comment.user.id}}">{{comment.user.user_name}}</span> on {{format_date comment.comment_date}}
+        </div>
+     </div>
+    </div>
+     {{/each}}  
+  </div>
+  {{/if}}
+  {{#if logged_in}}
+  <form class="form commentForm">
+    <div class="form-group">
+      <label for="comment_body">Comment:</label>
+      <textarea class="form-input" id="comment_body" name="comment_body"></textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" id="newComment">Submit</button>
+    </div>
+  </form>
+  {{/if}}
+</div>
+
+
+{{#if logged_in}}
+<script src="/js/deleteComment.js"></script>
+<script src="/js/addComment.js"></script>
+{{/if}}

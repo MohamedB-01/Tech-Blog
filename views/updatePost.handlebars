@@ -1,0 +1,25 @@
+<div class=" text-center display-flex flex-column justify-center">
+    <h2>  {{posts.user.user_name}}'s Dashboard </h2>
+    
+</div>
+
+<div class="row mt-3 ">
+  <div class="col-md-12">
+    <form class="form">
+      <div class="form-group">
+        <label for="post_title">Post Title:</label>
+        <input class="form-input" type="text" id="post_title" name="post_title" value="{{posts.post_title}}"/>
+      </div>
+      <div class="form-group">
+        <label for="post_body">Post Body:</label>
+        <textarea class="form-input" id="post_body" name="post_body" >{{posts.post_body}}</textarea>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary updateBtn" data-id="{{posts.id}}" >Update Post</button>
+        <button type="submit" class="btn btn-primary deleteBtn" data-id="{{posts.id}}">Delete Post</button>
+        <button type="submit" class="btn btn-primary cancelBtn" data-id="{{posts.id}}">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="/js/editPost.js"></script>

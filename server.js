@@ -1,4 +1,4 @@
-const bootstrap = require('bootstrap');
+
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
@@ -24,7 +24,7 @@ const hbs = exphbs.create({ helpers });
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 86400,
+    maxAge: 8640000,
     httpOnly: true,
     secure: false,
     sameSite: 'strict',
