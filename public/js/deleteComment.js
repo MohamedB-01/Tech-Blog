@@ -29,7 +29,7 @@ const deleteCommentHandler = async (event) => {
           alert('Failed to delete comment.');
         }
       } else {
-        alert('Failed to delete comment. Current user does not own this comment. Cannot delete.');
+        alert('Users can only delete their own comments');
       }
     }
   };

@@ -1,5 +1,5 @@
 <div>
-  <div class="">
+  <div >
     <h2 class="post text-center postId" data-id="{{posts.id}}">{{posts.post_title}}</h2>
     <p>{{posts.post_body}}</p>
     <p class="text-right side-note mb-0">Created by {{posts.user.user_name}} on {{format_date posts.post_date}}</p>
@@ -9,11 +9,11 @@
     <h3 class="post sessUserId" data-id="{{sessUserId}}">Comments:</h3>
      {{#each posts.comments as |comment| }}
     <div class="comment">  
-      <p>{{comment.comment_body}}</p>
+      <p>"{{comment.comment_body}}"</p>
       <div class="display-flex justify-space-between align-center">
         <button type="submit" class="btn btn-primary delete-btn" data-id="{{comment.id}},{{comment.user.id}}">Delete</button>
         <div class="side-note text-right">
-          ~<span class="userId" data-id="{{comment.user.id}}">{{comment.user.user_name}}</span> on {{format_date comment.comment_date}}
+          <span class="userId" data-id="{{comment.user.id}}">{{comment.user.user_name}}</span> on {{format_date comment.comment_date}}
         </div>
      </div>
     </div>
@@ -33,8 +33,7 @@
   {{/if}}
 </div>
 
-
-{{#if logged_in}}
 <script src="/js/deleteComment.js"></script>
+{{#if logged_in}}
 <script src="/js/addComment.js"></script>
 {{/if}}

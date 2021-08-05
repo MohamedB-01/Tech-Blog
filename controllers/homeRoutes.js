@@ -27,27 +27,57 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/post/:id', async (req, res) => {
-  try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['user_name'],
-        },
-      ],
-    });
+// // view a post by the post id and join with comment model and user model
+// router.get('/:id', async (req, res) => {
 
-    const post = postData.get({ plain: true });
+//   req.session.loggedIn = true;
 
-    res.render('post', {
-      ...post,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//   try {
+//     const postData = await Post.findByPk(req.params.id, { 
+//       include: [ 
+//         { 
+//           model: Comment,
+//           attributes: [
+//             'id',
+//             'comment_body',
+//             'comment_date',
+//             'post_id',
+//             'user_id',
+//           ],
+//           include: [
+//             {
+//               model: User,
+//               attribtes: ['user_name']
+//             },
+//           ], 
+//         },
+//         {
+//           model: User,
+//           attributes: [
+//             'id',
+//             'user_name',
+//           ],
+//         },
+//       ],
+//     });
+
+//     const posts = postData.get({ plain: true });
+
+  
+
+//     res.render('post', { 
+//       posts, 
+//       currentUser,
+//       sessUserId: req.session.user_id,
+//       logged_in: req.session.logged_in,
+//     });
+    
+//     console.log(res);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   };
+// });
+
 
 // Use withAuth middleware to prevent access to route
 router.get('/dashboard', withAuth, async (req, res) => {
