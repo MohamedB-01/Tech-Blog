@@ -82,6 +82,8 @@ router.get('/:id', async (req, res) => {
   };
 });
 
+
+
 //edit post by id 
 router.put('/edit/:id', withAuth, async (req,res) => {
   try {
@@ -101,6 +103,8 @@ router.put('/edit/:id', withAuth, async (req,res) => {
     res.status(500).json(err);
   }
 })
+
+
 
 // delete posts by post id
 router.delete('/delete/:id', withAuth, async (req, res) => {

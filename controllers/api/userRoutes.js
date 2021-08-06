@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 
-//create a new user and let them staty logged in.
+//create a new user and stay logged in.
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -17,6 +17,9 @@ router.post('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+
 
 // user logs in and sets loggedIn to true
 router.post('/login', async (req, res) => {

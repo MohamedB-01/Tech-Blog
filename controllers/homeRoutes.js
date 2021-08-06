@@ -2,9 +2,10 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Get all posts and JOIN with user data
 router.get('/', async (req, res) => {
   try {
-    // Get all posts and JOIN with user data
+    
     const postData = await Post.findAll({
       include: [
         {
@@ -14,10 +15,9 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
+    
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    // Pass serialized data and session flag into template
     res.render('home', { 
       posts, 
       logged_in: req.session.logged_in 
@@ -27,59 +27,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // view a post by the post id and join with comment model and user model
-// router.get('/:id', async (req, res) => {
-
-//   req.session.loggedIn = true;
-
-//   try {
-//     const postData = await Post.findByPk(req.params.id, { 
-//       include: [ 
-//         { 
-//           model: Comment,
-//           attributes: [
-//             'id',
-//             'comment_body',
-//             'comment_date',
-//             'post_id',
-//             'user_id',
-//           ],
-//           include: [
-//             {
-//               model: User,
-//               attribtes: ['user_name']
-//             },
-//           ], 
-//         },
-//         {
-//           model: User,
-//           attributes: [
-//             'id',
-//             'user_name',
-//           ],
-//         },
-//       ],
-//     });
-
-//     const posts = postData.get({ plain: true });
-
-  
-
-//     res.render('post', { 
-//       posts, 
-//       currentUser,
-//       sessUserId: req.session.user_id,
-//       logged_in: req.session.logged_in,
-//     });
-    
-//     console.log(res);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   };
-// });
 
 
-// Use withAuth middleware to prevent access to route
+
+// route to dashboard page from dashboard link
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -99,8 +50,10 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+
+// route to dashboard after login
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  
   if (req.session.logged_in) {
     res.redirect('/dashboard');
     return;
